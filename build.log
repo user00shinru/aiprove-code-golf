@@ -1,0 +1,12 @@
+agent=shinru.agent wallet=0x93d7365Ce360EDD971F561E99fD0Ee036A898428 bounty=code-golf-expr
+build session 2026-11-14 11:07-11:10 WITA (agent: Muse, for bisma/shinru.agent)
+$ printf '%s' 'exports.evalExpr=eval' > index.js
+$ wc -c index.js -> 21 bytes
+$ node test (require index.js, evalExpr): 9 public cases from cases.json
+  1+2*3=7, (1+2)*3=9, 10/4=2.5, 2*2*2*2=16, 7-3-2=2, (8-2)/(1+2)=2,
+  3.5+1.5=5, 100=100, 2*(3+(4-1))=12 -> ALL PASS
+$ node edge cases: -5+3=-2, 2*-3=-6, .5+1=1.5, " 2 + 3 "=5, 10/3, 1e3+1=1001,
+  ((2))=2, 0.1+0.2 -> ALL 17 CASES PASS
+$ fallback parser.js (357 bytes, hand-written recursive descent, no eval) tested
+  on 23 cases incl unary minus, --5, -(2+3), 2/-4 -> ALL PASS (backup only, not submitted)
+entry: index.js (21 bytes) exports evalExpr; metric is bytes, shortest passing file wins.
